@@ -12,7 +12,7 @@ export default function Footer() {
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14">
                 <div className="sm:col-span-2 lg:col-span-1">
-                    <a href="https://prebuiltui.com?utm_source=prompt2app">
+                    <a href="#home">
                         <img
                             src="/assets/logo.svg"
                             alt="Logo"

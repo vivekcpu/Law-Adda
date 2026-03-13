@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Login() {
     return (
         <div className="flex items-center min-h-screen justify-center max-w-6xl px-6 mx-auto">
-            <Link to='https://prebuiltui.com?utm_source=prompt2app' className="flex-1 hidden md:block" title="Go back to home">
+            <Link to='/#home' className="flex-1 hidden md:block" title="Go back to home">
                 <img
                     className="max-h-55 w-auto"
                     src="/assets/login-page-image.png"
