@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: 'Inter', sans-serif;
+    --font-domine: 'Domine', serif;
+}
+
+@layer base {
+    body {
+        @apply bg-white text-gray-800 text-sm antialiased;
+    }
+
+    button {
+        @apply cursor-pointer;
+    }
+}
