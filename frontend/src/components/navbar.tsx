@@ -13,7 +13,7 @@ export default function Navbar() {
   const lastScrollY = useRef(0);
 
   const navLinks: NavLink[] = [
-    { name: "Home", href: "/#home" },
+    { name: "Home", href: "//" },
     { name: "Features", href: "/#features" },
     { name: "Process", href: "/#process" },
     { name: "Pricing", href: "/#pricing" },
@@ -46,7 +46,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-10 py-3 border-b border-gray-200">
           
           {/* Logo */}
-          <a href="#home" className="flex items-center">
+          <a href="/" className="flex items-center">
             <img
               src="/assets/logo.png"
               alt="LawAdda Logo"
