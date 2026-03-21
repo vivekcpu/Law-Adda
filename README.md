@@ -85,11 +85,12 @@ AI then generates:
 - PDF Parsing
 - OCR (for scanned documents)
 
-## Database
-
+## Database (to be used in future uodates with privacy protection for users)
+- Right now for privacy we delete the documents once the text is extracted and then use that text to generate output.
 - MongoDB
 
-## Storage (Optional)
+
+## Storage (Optional to be added in future)
 
 - AWS S3
 - Cloudinary
