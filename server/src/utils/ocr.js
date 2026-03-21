@@ -18,7 +18,7 @@ export const OCR = async (filePath, mode) => {
         out_dir: outputDir,
         out_prefix: "page",
         page: null,   // convert all pages
-        dpi: 200      // ⚡ optimized (balance speed + quality)
+        dpi: 200      // optimized (balance speed + quality)
       };
 
       await poppler.convert(filePath, opts);
@@ -59,7 +59,7 @@ export const OCR = async (filePath, mode) => {
 
     const avgConfidence = totalConfidence / imagePaths.length;
 
-    // 🧹 Clean text
+    //  Clean text
     const cleanText = fullText.replace(/\s+/g, " ").trim();
 
  imagePaths.forEach((imgPath) => {
@@ -70,7 +70,7 @@ export const OCR = async (filePath, mode) => {
   }
 });
 
-    // 🔥 OCR QUALITY FILTER (optional but recommended)
+    //  OCR QUALITY FILTER (optional but recommended)
     if (!cleanText || avgConfidence < 45) {
       return {
         success: false,
