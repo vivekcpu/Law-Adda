@@ -67,7 +67,10 @@ web_modules/
 *.tgz
 
 ./src/uploads
+./src/data/vectorDB.json
 
+eng.traineddata
+hin.traineddata
 
 # Yarn Integrity file
 .yarn-integrity
