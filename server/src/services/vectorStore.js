@@ -3,15 +3,14 @@ import path from "path";
 
 const DB_PATH = "./src/data/vectorDB.json";
 
+// Load DB
 function loadDB() {
   const dir = path.dirname(DB_PATH);
 
-  //  create folder if missing
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 
-  // create file if missing
   if (!fs.existsSync(DB_PATH)) {
     fs.writeFileSync(DB_PATH, "[]");
     return [];
@@ -29,9 +28,9 @@ function saveDB(data) {
 export function storeEmbeddings(newEmbeddings) {
   const db = loadDB();
 
-  // use IDs instead of text
   const existingIds = new Set(db.map(item => item.id));
 
+  // avoid duplicate IDs
   const filtered = newEmbeddings.filter(e => !existingIds.has(e.id));
 
   const updatedDB = [...db, ...filtered];
@@ -54,13 +53,19 @@ function cosineSimilarity(a, b) {
   return dot / (Math.sqrt(magA) * Math.sqrt(magB));
 }
 
-// Search
-export function similaritySearch(queryVector, topK = 5) {
+// Search with docId support
+export function similaritySearch(queryVector, topK = 5, docId = null) {
   const db = loadDB();
 
-const limitedDB = db.slice(-1000); // last 1000 entries only
+  //  Filter by docId if provided
+  const filteredDB = docId
+    ? db.filter(item => item.docId === docId)
+    : db;
 
-  const scored = db.map(item => ({
+  //  Limit search space
+  const limitedDB = filteredDB.slice(-1000);
+
+  const scored = limitedDB.map(item => ({
     text: item.text,
     file: item.file,
     score: cosineSimilarity(queryVector, item.vector),

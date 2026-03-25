@@ -1,5 +1,6 @@
 // Embedding:- Conversion of the chunk data into vector arrays so, that they are understandable by machine.
 
+import crypto from "crypto";
 const OLLAMA_URL = process.env.OLLAMA_URL || 'http://localhost:11434/api/embeddings';
 
 // Text embedding feature
@@ -30,14 +31,18 @@ throw error;
 };
 
 // Embed chunks to embed ecery chunk using text embedding
-export async function embedChunks(chunks){
+export async function embedChunks(chunks,docId,fileName){
     try{
         const embeddings = await Promise.all(
-            chunks.map(async(chunk)=>{
+            chunks.map(async(chunk,index)=>{
                 const vector = await embedText(chunk);
                 return {
+            id: crypto.randomUUID(),
             text:chunk,
             vector,
+            file: fileName || "unknown",
+            docId: docId,             
+            chunkIndex: index ,        
                 };
             })
         );

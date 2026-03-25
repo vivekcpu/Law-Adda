@@ -7,17 +7,15 @@ import { similaritySearch } from "./vectorStore.js";
 
 console.log("GEN URL:", process.env.OLLAMA_GENERATE_URL);
 
-export async function askQuestion(question) {
+export async function askQuestion(question, docId) {
   try {
-    //  Convert query → embedding
     const queryVector = await embedText(question);
 
-    //  Retrieve relevant chunks from Chroma
-    const results = await similaritySearch(queryVector, 7);
+    //  Filter by docId
+    const results = await similaritySearch(queryVector, 7, docId);
 
     const context = results.map(r => r.text).join("\n\n");
 
-    //  Send to Mistral
     const response = await fetch(OLLAMA_GENERATE_URL, {
       method: "POST",
       headers: {
@@ -26,9 +24,12 @@ export async function askQuestion(question) {
       body: JSON.stringify({
         model: "mistral",
         prompt: `
-You are a helpful AI assistant. 
+You are a legal AI assistant.
 
-Use ONLY the context below to answer the question.
+Answer ONLY using the provided context.
+Do NOT make assumptions.
+If the answer is not present in the context, say:
+"I could not find this information in the document."
 
 Context:
 ${context}
@@ -44,13 +45,14 @@ Answer:
 
     const data = await response.json();
 
-   return {
-  answer: data.response,
-  sources: results.map(r =>({ 
- text: r.text.slice(0, 100),
-  file: r.file
-  })),
-};
+    return {
+      answer: data.response,
+      sources: results.map(r => ({
+        text: r.text.slice(0, 100),
+        file: r.file
+      })),
+    };
+
   } catch (error) {
     console.error("RAG error:", error);
     throw error;

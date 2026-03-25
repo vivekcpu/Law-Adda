@@ -10,62 +10,62 @@ interface Testimonial {
 }
 
 export default function OurTestimonials() {
-    const data: Testimonial[] = [
-        {
-            review:
-                "Super clean and easy to use. These Tailwind + React components saved me hours of dev time and countless lines of extra code!",
-            name: "Richard Nelson",
-            date: "12 Jan 2025",
-            rating: 5,
-            image:
-                "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
-        },
-        {
-            review:
-                "The design quality is top-notch. Perfect balance between simplicity and style. Highly recommend for any creative developer!",
-            name: "Sophia Martinez",
-            date: "15 Mar 2025",
-            rating: 5,
-            image:
-                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
-        },
-        {
-            review:
-                "Absolutely love the reusability of these components. My workflow feels 10x faster now with cleaner and more consistent layouts.",
-            name: "Ethan Roberts",
-            date: "20 Feb 2025",
-            rating: 5,
-            image:
-                "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&auto=format&fit=crop&q=60",
-        },
-        {
-            review:
-                "Clean, elegant, and efficient. These components are a dream for any modern web developer who values beautiful code.",
-            name: "Isabella Kim",
-            date: "20 Sep 2025",
-            rating: 5,
-            image:
-                "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&auto=format&fit=crop&q=60",
-        },
-        {
-            review:
-                "I've tried dozens of UI kits, but this one just feels right. Everything works seamlessly and looks incredibly polished.",
-            name: "Liam Johnson",
-            date: "04 Oct 2025",
-            rating: 5,
-            image:
-                "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&h=100&auto=format&fit=crop",
-        },
-        {
-            review:
-                "Brilliantly structured components with clean, modern styling. Makes development a joy and design updates super quick.",
-            name: "Ava Patel",
-            date: "01 Nov 2025",
-            rating: 5,
-            image:
-                "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/userImage/userImage1.png",
-        },
-    ];
+  const data: Testimonial[] = [
+    {
+        review:
+            "LawAdda made understanding complex legal documents incredibly simple. I uploaded my case file and got a clear explanation within seconds.",
+        name: "Rahul Verma",
+        date: "12 Jan 2026",
+        rating: 5,
+        image:
+            "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
+    },
+    {
+        review:
+            "As a law student, this platform is a game changer. The AI summaries and explanations save me hours of reading every day.",
+        name: "Priya Sharma",
+        date: "18 Feb 2026",
+        rating: 5,
+        image:
+            "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
+    },
+    {
+        review:
+            "The multilingual support is amazing. I uploaded a Hindi legal document and got an accurate explanation in English instantly.",
+        name: "Amit Kumar",
+        date: "25 Feb 2026",
+        rating: 5,
+        image:
+            "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&auto=format&fit=crop&q=60",
+    },
+    {
+        review:
+            "Clean UI, fast processing, and highly accurate insights. LawAdda feels like having a personal legal assistant.",
+        name: "Sneha Gupta",
+        date: "10 Mar 2026",
+        rating: 5,
+        image:
+            "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&auto=format&fit=crop&q=60",
+    },
+    {
+        review:
+            "I used LawAdda to analyze contracts before signing. It highlighted key clauses I would have completely missed.",
+        name: "Rohit Singh",
+        date: "15 Mar 2026",
+        rating: 5,
+        image:
+            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&h=100&auto=format&fit=crop",
+    },
+    {
+        review:
+            "Super intuitive and powerful. Upload, ask questions, and get precise answers instantly. Perfect for both beginners and professionals.",
+        name: "Ananya Patel",
+        date: "20 Mar 2026",
+        rating: 5,
+        image:
+            "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/userImage/userImage1.png",
+    },
+];
 
     return (
         <section className="flex flex-col items-center justify-between max-w-6xl mx-auto mt-32 px-4">

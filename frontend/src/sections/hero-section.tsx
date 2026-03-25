@@ -15,66 +15,91 @@ export default function HeroSection() {
     const [charIndex, setCharIndex] = useState(0);
     const [deleting, setDeleting] = useState(false);
 
+    //  FILE STATE
+    const [file, setFile] = useState<File | null>(null);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (!file && !prompt) {
+            alert("Upload a PDF or enter a prompt");
+            return;
+        }
+
         setLoading(true);
-        setTimeout(() => {
-            alert("Service is currently unavailable. Please try again later.");
+
+        try {
+            const formData = new FormData();
+
+            if (file) formData.append("file", file);
+            formData.append("prompt", prompt || "");
+            formData.append("mode", selected || "general");
+
+            const res = await fetch("http://localhost:5000/api/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await res.json();
+            console.log("Response:", data);
+
+        } catch (error) {
+            console.error(error);
+            alert("Something went wrong");
+        } finally {
             setLoading(false);
             setPrompt("");
             setSelected(null);
-        }, 10000);
+            setFile(null);
+        }
     };
 
     const placeholders = [
-        "portfolio website...",
-        "e-commerce store...",
-        "business landing page...",
-        "personal blog...",
-        "startup website...",
+        "Upload a legal document...",
+        "Summarize this contract...",
+        "Explain this legal notice...",
+        "Analyze clauses in my agreement...",
+        "Ask anything about law...",
     ];
-
 
     const prompts: Prompt[] = [
         {
-            label: "Portfolio Website",
-            prompt: "Create a modern portfolio website to showcase my skills, projects, experience, and personal brand professionally",
+            label: "Summarize Document",
+            prompt: "Summarize this legal document into simple, easy-to-understand key points",
         },
         {
-            label: "E-commerce Website",
-            prompt: "Build a fast, secure e-commerce website with product listings, cart system, payments, and admin dashboard",
+            label: "Explain Legal Terms",
+            prompt: "Explain complex legal terms and clauses in simple language with examples",
         },
         {
-            label: "Blog",
-            prompt: "Create a clean, SEO-optimized blog website for writing articles, managing content, and growing audience online",
+            label: "Contract Analysis",
+            prompt: "Analyze this contract and highlight important clauses, risks, and obligations",
         },
         {
-            label: "Landing Page",
-            prompt: "Design a high-conversion landing page with strong hero section, CTA buttons, and lead capture form",
+            label: "Case Explanation",
+            prompt: "Explain this legal case in simple terms including facts, judgment, and reasoning",
         },
         {
-            label: "Resume Website",
-            prompt: "Generate a professional resume website with skills, experience, education, projects, and downloadable CV section",
+            label: "Legal Q&A",
+            prompt: "Answer my legal question clearly with proper explanation and relevant context",
         },
         {
-            label: "Personal Website",
-            prompt: "Create a personal branding website with about section, social links, blogs, and contact form",
+            label: "Clause Breakdown",
+            prompt: "Break down each clause of this agreement and explain its meaning and impact",
         },
         {
-            label: "Business Website",
-            prompt: "Build a professional business website with services, testimonials, pricing section, and customer inquiry form",
+            label: "Risk Detection",
+            prompt: "Identify potential risks, hidden clauses, and legal issues in this document",
         },
         {
-            label: "Marketing Website",
-            prompt: "Create a marketing-focused website optimized for conversions, analytics tracking, funnels, and campaign integrations",
+            label: "Multilingual Translation",
+            prompt: "Translate this legal document into another language while preserving its meaning",
         },
         {
-            label: "Educational Website",
-            prompt: "Build an educational website with courses, student dashboard, lesson pages, progress tracking, and quizzes",
+            label: "Simplify Document",
+            prompt: "Convert this legal document into plain English that a non-lawyer can understand",
         },
     ];
-
 
     useEffect(() => {
         if (prompt) return;
@@ -105,15 +130,15 @@ export default function HeroSection() {
         <section id="home" className="flex flex-col items-center justify-center">
             <div className="flex items-center gap-2 text-gray-500 mt-32">
                 <TrendingUpIcon className="size-4.5" />
-                <span>Trusted by 2,000+ founders</span>
+                <span>Trusted by legal professionals & learners</span>
             </div>
 
             <h1 className="text-center text-5xl/17 md:text-[64px]/20 font-semibold max-w-2xl m-2">
-                Build custom apps with AI
+                Your AI-powered legal assistant
             </h1>
 
             <p className="text-center text-base text-gray-500 max-w-md mt-2">
-                “No code. No design skills. Just describe your idea and launch instantly.”
+                No legal background required. Upload documents, ask questions, and get instant, easy-to-understand answers.
             </p>
 
             <form onSubmit={handleSubmit} className="focus-within:ring-2 focus-within:ring-gray-300 border border-gray-200 rounded-xl max-w-2xl w-full mt-8">
@@ -127,9 +152,32 @@ export default function HeroSection() {
                     required
                 />
 
+                {/*  FILE NAME DISPLAY */}
+                {file && (
+                    <p className="text-sm text-gray-500 px-4">
+                        Uploaded: {file.name}
+                    </p>
+                )}
+
                 <div className="flex items-center justify-between p-4 pt-0">
                     <label htmlFor="file" className="border border-gray-200 text-gray-500 p-1.5 rounded-md cursor-pointer">
-                        <input type="file" id="file" hidden />
+                        <input
+                            type="file"
+                            id="file"
+                            hidden
+                            accept="application/pdf"
+                            onChange={(e) => {
+                                const selectedFile = e.target.files?.[0];
+
+                                if (selectedFile) {
+                                    if (selectedFile.type !== "application/pdf") {
+                                        alert("Only PDF files are allowed");
+                                        return;
+                                    }
+                                    setFile(selectedFile);
+                                }
+                            }}
+                        />
                         <UploadCloudIcon className="size-4.5" />
                     </label>
 
@@ -146,12 +194,13 @@ export default function HeroSection() {
                 </div>
             </form>
 
-            <Marquee gradient speed={30} pauseOnHover className="max-w-2xl w-full mt-3" >
+            <Marquee gradient speed={30} pauseOnHover className="max-w-2xl w-full mt-3">
                 {prompts.map((item) => {
                     const isSelected = selected === item.label;
 
                     return (
-                        <button key={item.label}
+                        <button
+                            key={item.label}
                             onClick={() => {
                                 setPrompt(item.prompt);
                                 setSelected(item.label);

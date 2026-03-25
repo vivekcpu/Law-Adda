@@ -19,14 +19,20 @@ router.get("/test", (req, res) => {
 });
 
 // Ask route
-router.post("/ask", askAI);
+router.post("/ask", (req, res, next) => {
+  console.log("Incoming ASK request:", req.body);
+  next();
+}, askAI);
 
-// Upload route (FULL RAG PIPELINE)
+//  Upload route (FIXED)
 router.post("/upload", upload.single("file"), async (req, res) => {
   try {
     const filePath = req.file.path;
 
-    //  Step 0: Extract text
+  
+    const docId = crypto.randomUUID();
+
+  
     const result = await processDocument(filePath);
     const text = result.text;
 
@@ -36,7 +42,7 @@ router.post("/upload", upload.single("file"), async (req, res) => {
       throw new Error("No text extracted from document");
     }
 
-    //  Step 1: Chunk
+    
     const chunks = chunkText(text);
     console.log("CHUNKS:", chunks.length);
 
@@ -44,22 +50,12 @@ router.post("/upload", upload.single("file"), async (req, res) => {
       throw new Error("Chunking failed");
     }
 
-    //  Step 2: Embed
-   const embeddingsRaw = await embedChunks(chunks);
-
-const embeddings = embeddingsRaw.map((e) => {
-  const id = crypto
-    .createHash("md5")
-    .update(e.text)
-    .digest("hex");
-
-  return {
-    id,                // UNIQUE ID
-    text: e.text,
-    vector: e.vector,
-    file: req.file.originalname
-  };
-});
+    
+    const embeddings = await embedChunks(
+      chunks,
+      docId,
+      req.file.originalname
+    );
 
     console.log("EMBEDDINGS:", embeddings.length);
 
@@ -67,18 +63,19 @@ const embeddings = embeddingsRaw.map((e) => {
       throw new Error("Embedding failed");
     }
 
-    //  Step 3: Store
-    fs.writeFileSync("./src/data/vectorDB.json", JSON.stringify([], null, 2));
+
+   
     storeEmbeddings(embeddings);
     console.log("STORED SUCCESS");
 
-    //  Step 4: Delete uploaded file
+    
     fs.unlinkSync(filePath);
 
-    //  Response
+    // RESPONSE (IMPORTANT FOR CHAT)
     res.json({
       success: true,
       message: "File processed and indexed successfully",
+      docId: docId,  
       chunks: chunks.length,
       embeddings: embeddings.length
     });
@@ -86,7 +83,6 @@ const embeddings = embeddingsRaw.map((e) => {
   } catch (error) {
     console.error("UPLOAD ERROR:", error);
 
-    // try deleting file even on error
     if (req.file?.path && fs.existsSync(req.file.path)) {
       fs.unlinkSync(req.file.path);
     }
