@@ -8,6 +8,7 @@ import { askAI } from "../controllers/aiController.js";
 import { chunkText } from "../services/chunkServices.js";
 import { embedChunks } from "../services/embeddingService.js";
 import { storeEmbeddings } from "../services/vectorStore.js";
+import { isLegalDocument } from "../services/legalValidator.js";
 
 const router = express.Router();
 
@@ -42,7 +43,18 @@ router.post("/upload", upload.single("file"), async (req, res) => {
       throw new Error("No text extracted from document");
     }
 
-    
+    const isLegal = await isLegalDocument(text);
+
+if (!isLegal) {
+  fs.unlinkSync(filePath);
+
+  return res.status(400).json({
+    success: false,
+    message: "Uploaded file does not appear to be a legal document"
+  });
+}
+
+
     const chunks = chunkText(text);
     console.log("CHUNKS:", chunks.length);
 

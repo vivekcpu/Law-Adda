@@ -1,4 +1,4 @@
-import { ChartSplineIcon, LayoutPanelTopIcon, NotebookPenIcon } from "lucide-react";
+import { ScaleIcon, FileTextIcon, LanguagesIcon } from "lucide-react";
 
 interface Feature {
     icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -10,21 +10,22 @@ export default function FeaturesSection() {
 
     const features: Feature[] = [
         {
-            icon: LayoutPanelTopIcon,
-            title: "AI Layout Generator",
-            description: "Automatically creates a complete website layout from a single prompt.",
+            icon: FileTextIcon,
+            title: "AI Document Analysis",
+            description: "Upload legal documents and get instant summaries, key points, and simplified explanations.",
         },
         {
-            icon: NotebookPenIcon,
-            title: "AI Content Writer",
-            description: "Generates high-quality headlines, text, and call-to-actions instantly.",
+            icon: ScaleIcon,
+            title: "Legal Insights & Risk Detection",
+            description: "Identify important clauses, obligations, and potential risks hidden inside agreements.",
         },
         {
-            icon: ChartSplineIcon,
-            title: "Performance Optimization",
-            description: "Ensures fast load speed, clean code, and high PageSpeed scores.",
+            icon: LanguagesIcon,
+            title: "Multilingual Support",
+            description: "Understand legal documents in multiple languages with accurate AI-powered translation and explanation.",
         },
     ];
+
     return (
         <div id="features" className="grid border mt-42 rounded-lg max-w-6xl mx-auto border-gray-200/70 grid-cols-1 divide-y divide-gray-200/70 lg:grid-cols-3 lg:divide-x lg:divide-y-0">
             {features.map((item, index) => (

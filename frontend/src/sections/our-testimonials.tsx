@@ -71,8 +71,8 @@ export default function OurTestimonials() {
         <section className="flex flex-col items-center justify-between max-w-6xl mx-auto mt-32 px-4">
             <h3 className="font-domine text-3xl">OUR TESTIMONIALS</h3>
             <p className="mt-4 text-sm/6 text-gray-500 max-w-md text-center">
-                We've been using our product for over a year and have received
-                overwhelmingly positive feedback from our customers.
+                We've been using our site and have received
+                overwhelmingly positive feedback from our users.
             </p>
 
             <Marquee pauseOnHover className="mt-16" gradient speed={30}>

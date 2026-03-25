@@ -7,27 +7,27 @@ type Step = {
 
 const leftSteps: Step[] = [
     {
-        title: "AI Generates Smart Layouts",
+        title: "AI Analyzes Your Document",
         description:
-            "Our AI Layout Generator creates a complete website structure with proper sections, spacing, and layout flow, ensuring a clean, modern, and high-conversion design from the start.",
+            "Our AI processes your uploaded legal document using advanced parsing and understanding techniques to extract structure, clauses, and key legal information instantly.",
     },
     {
-        title: "Website Is Optimized & Published",
+        title: "Get Clear Insights Instantly",
         description:
-            "Performance Optimization is applied automatically to improve speed, structure, and responsiveness, so your website is fast, stable, and ready to publish across all devices.",
+            "Receive simplified summaries, highlighted risks, and key points in seconds, making complex legal documents easy to understand and act upon.",
     },
 ];
 
 const rightSteps: Step[] = [
     {
-        title: "Describe Your Website Idea",
+        title: "Upload or Ask Anything",
         description:
-            "Explain your business type, target audience, and style in a few words. Our system understands your intent and prepares everything needed to build a website that fits your vision.",
+            "Upload your legal document or type your query. Whether it's a contract, notice, or case, LawAdda understands your input and prepares it for analysis.",
     },
     {
-        title: "Content Is Written Automatically",
+        title: "Ask Questions & Explore",
         description:
-            "The AI Content Writer generates headlines, section text, and call-to-actions tailored to your website goals, keeping everything clear, engaging, and optimized for user interaction.",
+            "Interact with the document by asking questions, exploring clauses, or requesting explanations in simple language tailored to your needs.",
     },
 ];
 
@@ -65,10 +65,10 @@ export default function BuildProcess() {
 
     return (
         <section id="process" className="flex flex-col items-center mt-32">
-            <p className="font-domine">Simple 4-Step Process</p>
+            <p className="font-domine">How to Use LawAdda</p>
 
             <h3 className="text-3xl max-w-sm text-gray-500 text-center mt-5">
-                Build Your Website in Just Four Simple Steps
+                Upload and understand your documents in just 4 easy steps
             </h3>
 
             <div className="flex flex-col md:flex-row mt-20 md:mt-32">

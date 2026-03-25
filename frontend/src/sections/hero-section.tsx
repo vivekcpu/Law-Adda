@@ -187,7 +187,7 @@ export default function HeroSection() {
                         ) : (
                             <>
                                 <SparklesIcon className="size-4" />
-                                <span className="ml-2">Create</span>
+                                <span className="ml-2">Ask</span>
                             </>
                         )}
                     </button>

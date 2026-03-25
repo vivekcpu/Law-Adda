@@ -16,7 +16,6 @@ export default function Navbar() {
     { name: "Home", href: "//" },
     { name: "Features", href: "/#features" },
     { name: "Process", href: "/#process" },
-    { name: "Pricing", href: "/#pricing" },
   ];
 
   useEffect(() => {
@@ -71,7 +70,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <Link
               to="/login"
-              className="px-5 py-2 hover:bg-gray-100 rounded-lg transition"
+              className="px-5 py-2 bg-gray-200 hover:bg-gray-300  rounded-lg transition"
             >
               Login
             </Link>
@@ -80,7 +79,7 @@ export default function Navbar() {
               to="/"
               className="bg-gradient-to-b from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black px-5 py-2 text-white rounded-lg transition"
             >
-              Try Demo
+              Create Account
             </Link>
           </div>
 

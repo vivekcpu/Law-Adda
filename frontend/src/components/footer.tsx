@@ -33,19 +33,32 @@ export default function Footer() {
                     </div>
                 </div>
                 <div>
-                    <h2 className="font-semibold text-gray-800 mb-5">Subscribe to our newsletter</h2>
-                    <div className="text-sm space-y-6 max-w-sm">
-                        <p>The latest news, articles, and resources, sent to your inbox weekly.</p>
-                        <div className="flex items-center">
-                            <input className="rounded-l-md bg-gray-100 outline-none w-full max-w-64 h-11 px-3" type="email" placeholder="Enter your email" />
-                            <button className="bg-linear-to-b from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 transition px-4 h-11 text-white rounded-r-md">Subscribe</button>
-                        </div>
-                    </div>
+                   <h2 className="font-semibold text-gray-800 mb-5">Wanna Know more about us. Let's Talk</h2>
+<div className="text-sm space-y-6 max-w-sm">
+    <p>You can send me an email via clicking on this link.</p>
+    <div className="flex items-center">
+        <input
+            id="emailInput"
+            className="rounded-l-md bg-gray-100 outline-none w-full max-w-64 h-11 px-3"
+            type="email"
+            placeholder="Enter your email"
+        />
+        <button
+            onClick={() => {
+                const email = (document.getElementById("emailInput") as HTMLInputElement).value;
+                window.location.href = `mailto:vrtiwary2006@gmail.com?subject=LawAdda Inquiry&body=Hi, my email is ${email}`;
+            }}
+            className="bg-linear-to-b from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 transition px-4 h-11 text-white rounded-r-md"
+        >
+            Email
+        </button>
+    </div>
+</div>
                 </div>
             </div>
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-4 border-t mt-6 border-slate-200">
                 <p className="text-center">
-                    Copyright 2025 © <a href="/">PrebuiltUI</a> All Right Reserved.
+                    Copyright 2026 © <a href="/">LawAdda</a> All Right Reserved.
                 </p>
                 <div className="flex items-center gap-4">
                     <Link to="/">
