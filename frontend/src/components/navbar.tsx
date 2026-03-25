@@ -114,7 +114,7 @@ export default function Navbar() {
           onClick={() => setIsOpen(false)}
           className="bg-gradient-to-b from-gray-700 to-gray-900 px-6 py-2 text-white rounded-lg"
         >
-          Try Demo
+         Create Account
         </Link>
 
         <button
