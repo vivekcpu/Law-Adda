@@ -144,7 +144,7 @@ export default function HeroSection() {
             <form onSubmit={handleSubmit} className="focus-within:ring-2 focus-within:ring-gray-300 border border-gray-200 rounded-xl max-w-2xl w-full mt-8">
                 <textarea
                     className="w-full resize-none p-4 outline-none text-gray-600"
-                    placeholder={`Create a ${animatedPlaceholder}`}
+                    placeholder={`${animatedPlaceholder}`}
                     rows={3}
                     minLength={10}
                     value={prompt}
