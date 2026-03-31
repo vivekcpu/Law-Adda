@@ -1,96 +1,164 @@
 # ⚖️ LawAdda
-## AI-Powered Legal Document Insight Platform
+### AI-Powered Legal Document Insight Platform
 
 LawAdda is an AI-powered platform that simplifies complex legal documents by generating summaries, explaining clauses, and extracting key insights from uploaded contracts and agreements.
 
 The platform allows users to upload legal PDFs and instantly receive AI-driven analysis that helps them understand complicated legal language in a simple and accessible way.
 
-Built using MERN Stack, AI models, and modern document processing tools, LawAdda aims to make legal information easier to understand for everyone.
+Built using the MERN stack, local LLMs, and modern document processing tools, LawAdda aims to make legal information easier to understand for everyone.
 
 ---
 
-# 🚀 Features
+## 🚀 Features
 
-## 📄 Document Upload
+### 📄 Document Upload
+- Upload legal documents in PDF format  
+- Text extraction from PDFs  
+- OCR support for scanned documents  
 
-- Upload legal documents in PDF format
-- Supports text extraction from documents
-- OCR support for scanned files (if applicable)
+### 🤖 AI Legal Insights
+- Automatic document summarization  
+- Clause-level explanations  
+- Identification of important sections  
+- Simplified legal language  
 
----
+### 🔍 Smart Document Analysis
+- Highlights key clauses  
+- Breaks down complex legal terms  
+- Generates quick insights  
 
-## 🤖 AI Legal Insights
-
-- Automatic document summarization
-- Clause-level explanation
-- Identification of important sections
-- Simplified legal language for better understanding
-
----
-
-## 🔍 Smart Document Analysis
-
-- Highlights key clauses
-- Breaks down complex legal terms
-- Generates quick document insights
+### 🌐 Modern Web Interface
+- Responsive UI (React + Tailwind)  
+- Smooth document upload & chat flow  
+- Dedicated chat-based analysis system  
 
 ---
 
-## 🌐 Modern Web Interface
+## 🧠 How It Works (Workflow)
 
-- Responsive and clean UI
-- Easy document upload and analysis
-- User-friendly dashboard
-
----
-
-# 🧠 How It Works
-
-1. User uploads a legal document (PDF)
-2. Backend extracts text from the document
-3. If scanned, OCR converts images to text
-4. Extracted content is processed using AI models
-
-AI then generates:
-
-- Document Summary
-- Clause Explanations
-- Key Insights
-
-5. Results are displayed in the web interface
+1. User uploads a legal document (`/upload` route)
+2. Backend processes the file:
+   - PDF parsing OR
+   - OCR (for scanned documents)
+3. Extracted text is passed to:
+   - Legal Validator (checks if document is legal-related)
+4. Text processing pipeline:
+   - Chunking  
+   - Embedding generation  
+   - Stored in Vector DB  
+5. `docId` is generated
+6. User interacts via `/ask` route:
+   - Query sent with `docId`
+   - Relevant chunks retrieved (RAG)
+   - LLM generates response
+7. Results displayed in chat UI
 
 ---
 
-# 🏗️ Tech Stack
+## 🏗️ Project Structure
+LawAdda/
+│
+├── frontend/
+│ ├── src/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ ├── sections/
+│ │ ├── App.tsx
+│ │ └── main.tsx
+│
+├── server/
+│ ├── src/
+│ │ ├── config/
+│ │ ├── controllers/
+│ │ ├── routes/
+│ │ ├── services/
+│ │ │ ├── aiService.js
+│ │ │ ├── ragService.js
+│ │ │ ├── embeddingService.js
+│ │ │ ├── chunkServices.js
+│ │ │ ├── documentProcessor.js
+│ │ │ ├── legalValidator.js
+│ │ │ └── vectorStore.js
+│ │ ├── middleware/
+│ │ ├── utils/
+│ │ │ ├── ocr.js
+│ │ │ └── pdfParser.js
+│ │ └── data/
+│ │ └── vectorDB.json
+│ │
+│ ├── uploads/
+│ ├── server.js
+│ └── .env
+ 
+---
 
-## Frontend
+## 🧰 Tech Stack
 
-- React.js
-- Tailwind CSS
-- Prebuilt UI Components
+### Frontend
+- React.js  
+- Tailwind CSS  
+- TypeScript  
 
-## Backend
+### Backend
+- Node.js  
+- Express.js  
 
-- Node.js
-- Express.js
+### AI / NLP
+- Local LLM via **Ollama (Mistral)**  
+- Retrieval-Augmented Generation (RAG)  
 
-## AI / NLP
+### Document Processing
+- PDF Parsing  
+- OCR (Tesseract - Hindi + English support)  
 
-- LLM Integration
-- Ollama
-- LangChain
+### Data Handling
+- Custom Vector Store (JSON-based)  
+- Embeddings pipeline  
 
-## Document Processing
+### Security
+- Crypto (for future secure processing & hashing)
 
-- PDF Parsing
-- OCR (for scanned documents)
+---
 
-## Database (to be used in future uodates with privacy protection for users)
-- Right now for privacy we delete the documents once the text is extracted and then use that text to generate output.
-- MongoDB
+## 🔐 Privacy First Approach
 
+- Documents are **NOT stored permanently**
+- Files are deleted after text extraction  
+- Only processed text is used temporarily  
+- No user data persistence (currently)
 
-## Storage (Optional to be added in future)
+---
 
-- AWS S3
-- Cloudinary
+## 🔮 Future Improvements
+
+- 🔐 Authentication & user accounts  
+- ☁️ Cloud storage integration:
+  - AWS S3  
+  - Cloudinary  
+- 🧠 Better legal-specific fine-tuned models  
+- 📊 Advanced document visualization  
+- 📁 Document history (secure & encrypted)  
+- ⚡ Faster vector database (FAISS / Pinecone)  
+- 🔒 End-to-end encryption using crypto  
+
+---
+
+## ⚠️ Disclaimer
+
+**LawAdda is an AI-powered assistance tool and does NOT replace a professional lawyer.**
+
+- The insights generated are for informational purposes only  
+- Users should consult a qualified legal professional for legal advice  
+- We do not guarantee legal accuracy or completeness  
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+MIT License
+
+Copyright (c) 2026 LawAdda
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files...
