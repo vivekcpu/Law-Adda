@@ -56,6 +56,7 @@ Built using the MERN stack, local LLMs, and modern document processing tools, La
 ---
 
 ## 🏗️ Project Structure
+```
 LawAdda/
 │
 ├── frontend/
@@ -89,7 +90,7 @@ LawAdda/
 │ ├── uploads/
 │ ├── server.js
 │ └── .env
- 
+ ```
 ---
 
 ## 🧰 Tech Stack
