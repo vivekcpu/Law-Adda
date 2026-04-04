@@ -1,6 +1,7 @@
 import { Loader2Icon, SparklesIcon, TrendingUpIcon, UploadCloudIcon } from "lucide-react";
 import Marquee from "react-fast-marquee";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Prompt {
     label: string;
@@ -18,41 +19,56 @@ export default function HeroSection() {
     //  FILE STATE
     const [file, setFile] = useState<File | null>(null);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    
 
-        if (!file && !prompt) {
-            alert("Upload a PDF or enter a prompt");
-            return;
+const navigate = useNavigate();
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!file && !prompt) {
+        alert("Upload a PDF or enter a prompt");
+        return;
+    }
+
+    setLoading(true);
+
+    try {
+        const formData = new FormData();
+
+        if (file) formData.append("file", file);
+        formData.append("prompt", prompt || "");
+        formData.append("mode", selected || "general");
+
+        // STEP 1: Upload file
+        const uploadRes = await fetch("http://localhost:5000/api/upload", {
+            method: "POST",
+            body: formData,
+        });
+
+        const uploadData = await uploadRes.json();
+
+        if (!uploadData.success) {
+            throw new Error(uploadData.message);
         }
 
-        setLoading(true);
+        const docId = uploadData.docId;
 
-        try {
-            const formData = new FormData();
 
-            if (file) formData.append("file", file);
-            formData.append("prompt", prompt || "");
-            formData.append("mode", selected || "general");
+        // STEP 2: Navigate to chat page
+        navigate(`/chat/${docId}`, {
+            state: {
+                initialPrompt: prompt,
+            },
+        });
 
-            const res = await fetch("http://localhost:5000/api/upload", {
-                method: "POST",
-                body: formData,
-            });
-
-            const data = await res.json();
-            console.log("Response:", data);
-
-        } catch (error) {
-            console.error(error);
-            alert("Something went wrong");
-        } finally {
-            setLoading(false);
-            setPrompt("");
-            setSelected(null);
-            setFile(null);
-        }
-    };
+    } catch (error: any) {
+        console.error(error);
+        alert(error.message || "Something went wrong");
+    } finally {
+        setLoading(false);
+    }
+};
 
     const placeholders = [
         "Upload a legal document...",
