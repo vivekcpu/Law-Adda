@@ -14,32 +14,32 @@ export async function askQuestion(question, docId) {
 
     const context = results.map(r => r.text).join("\n\n");
 
-    //  DEFINE PROMPT OUTSIDE
    const prompt = `
 You are a strict legal AI assistant.
 
 IMPORTANT:
 - You MUST format your response using VALID MARKDOWN.
 - Use "###" for headings.
+- ALSO wrap headings in **bold**.
 - Use "-" for bullet points.
 - Each bullet MUST be on a new line.
 - Do NOT write plain paragraphs.
 
 If answer not found, respond EXACTLY:
-### Answer
+### **Answer**
 - I could not find this information in the document.
 
 FORMAT (STRICT):
 
-### Summary
+### **Summary**
 - Point 1
 - Point 2
 
-### Key Details
+### **Key Details**
 - Detail 1
 - Detail 2
 
-### Risks
+### **Risks**
 - Risk 1
 - Risk 2
 
