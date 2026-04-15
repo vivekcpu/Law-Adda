@@ -130,17 +130,27 @@ LawAdda/
 
 ---
 
-## 🔮 Future Improvements
+##🔮 Future Improvements & Scalability Roadmap
 
-- 🔐 Authentication & user accounts  
-- ☁️ Cloud storage integration:
-  - AWS S3  
-  - Cloudinary  
-- 🧠 Better legal-specific fine-tuned models  
-- 📊 Advanced document visualization  
-- 📁 Document history (secure & encrypted)  
-- ⚡ Faster vector database (FAISS / Pinecone)  
-- 🔒 End-to-end encryption using crypto  
+
+-🔐 Authentication & User Management
+Secure login, role-based access, and personalized document handling.
+-☁️ Cloud Storage Integration
+Seamless document storage and retrieval using:
+   -AWS S3
+   -Cloudinary
+-⚙️ Scalable Processing Pipeline (In Progress)
+   -Asynchronous OCR and AI request handling using job queues
+   -Redis-backed caching & task management to handle concurrent users efficiently
+   -Improved system reliability under high load
+-🧠 Domain-Specific AI Enhancements
+Fine-tuned legal language models for more accurate and context-aware responses.
+-📊 Advanced Document Visualization
+Interactive summaries, highlights, and structured insights for better readability.
+-📁 Secure Document History
+Encrypted storage with version tracking for past uploads and queries.
+-⚡ High-Performance Vector Search
+Integration with optimized vector databases like FAISS or Pinecone for faster semantic retrieval.
 
 ---
 
