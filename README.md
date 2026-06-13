@@ -1,4 +1,4 @@
-# ⚖️ LawAdda
+# ⚖️ LawAdda ([FOSS Hack'26 Winner](https://fossunited.org/fosshack/results?year=2026))
 ### AI-Powered Legal Document Insight Platform
 
 LawAdda is an AI-powered platform that simplifies complex legal documents by generating summaries, explaining clauses, and extracting key insights from uploaded contracts and agreements.
